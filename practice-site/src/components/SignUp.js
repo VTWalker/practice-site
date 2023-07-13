@@ -1,10 +1,19 @@
 import React, { useRef } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext';
 
-export default function SignUp() {
+function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    const { signup } = useAuth();
+
+    function handleSubmit(e) {
+        e.preventDefault(); // Prevents form from refreshing
+
+        signup(emailRef.current.value, passwordRef.current.value)   // Pass in email and password value to sign in function
+    }
+
     return (
         <>
             <Card>
@@ -35,3 +44,5 @@ export default function SignUp() {
         </>
     )
 }
+
+export default SignUp;
